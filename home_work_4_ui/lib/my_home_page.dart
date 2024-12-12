@@ -9,7 +9,7 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       backgroundColor: Color(0xff056C5C),
       appBar: AppBar(
-        title: Text('Тапшырма 4'),
+        title: const Text('Тапшырма 4'),
       ),
       body: Center(
         child: Column(
@@ -25,27 +25,27 @@ class MyHomePage extends StatelessWidget {
                     color: Colors.white,
                     fontSize: 28,
                     fontWeight: FontWeight.w400)),
-            Divider(
+            const Divider(
               indent: 57,
               endIndent: 57,
               height: 0.5,
               color: Colors.white,
               thickness: 2,
             ),
-            SizedBox(
+            const SizedBox(
               height: 23.5,
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                   hintText: '+996 778 10 10 10',
                   fillColor: Colors.white,
                   filled: true,
                   border: OutlineInputBorder()),
             ),
-            SizedBox(
+            const SizedBox(
               height: 24,
             ),
-            TextField(
+            const TextField(
               decoration: InputDecoration(
                   hintText: 'keldibekovameridina@gmail.com',
                   fillColor: Colors.white,
