@@ -20,7 +20,7 @@ class _MyHomePageState extends State<MyHomePage> {
         children: [
           XylophoneKey(
             color: Colors.red,
-            onPressed: () async* {
+            onPressed: () async {
               audio.play(AssetSource('assets/do.wav'));
             },
           ),
