@@ -1,16 +1,54 @@
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:weather_app_1_ui/constans.dart/app_text_styles.dart';
 import 'package:weather_app_1_ui/constans.dart/liner_gradient.dart';
+import 'package:weather_app_1_ui/server.dart';
 import 'package:weather_app_1_ui/widgets/slieder_view.dart';
 import 'package:weather_app_1_ui/widgets/weather_days_card.dart';
 import 'package:weather_app_1_ui/widgets/weatherviewbanner.dart';
 
-class MyHomePage extends StatelessWidget {
+class MyHomePage extends StatefulWidget {
   const MyHomePage({super.key});
 
   @override
+  State<MyHomePage> createState() => _MyHomePageState();
+}
+
+class _MyHomePageState extends State<MyHomePage> {
+  String weatherInfo = "Maalymatjuktoluudo...";
+  String sityName = "";
+  String countryN = "";
+  void weatherFun() async {
+    final url = Uri.parse(
+        'https://api.openweathermap.org/data/2.5/weather?q=osh,&appid=41aa18abb8974c0ea27098038f6feb1b');
+    final response = await http.get(url);
+    if (response.statusCode == 200) {
+      print(response.body);
+
+      final data = jsonDecode(response.body);
+      final name = data["name"];
+      final countryName = data["sys"]["country"];
+      final temp = data["main"]["temp"];
+      final withKelvin = temp - 273.15;
+      setState(() {
+        weatherInfo = withKelvin.toStringAsFixed(0);
+        sityName = name;
+        countryN = countryName;
+      });
+    } else {
+      print(response.statusCode);
+    }
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    weatherFun();
+  }
+
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
@@ -40,15 +78,15 @@ class MyHomePage extends StatelessWidget {
                       ),
                     ],
                   ),
-                  const Align(
+                  Align(
                     alignment: Alignment.topLeft,
-                    child: Text('Bishkek,\nKyrgyzstan',
+                    child: Text('$sityName,\n$countryN',
                         style: AppTextStyles.LacotionStyle),
                   ),
                   const Align(
-                      alignment: Alignment.topLeft,
-                      child:
-                          Text('Tue, Jun 30', style: AppTextStyles.DateStyle)),
+                    alignment: Alignment.topLeft,
+                    child: Text('Tue, Jun 30', style: AppTextStyles.DateStyle),
+                  ),
                   Row(
                     children: [
                       Image.asset(
@@ -59,7 +97,7 @@ class MyHomePage extends StatelessWidget {
                       const SizedBox(
                         width: 10,
                       ),
-                      const Column(
+                      Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
@@ -67,16 +105,16 @@ class MyHomePage extends StatelessWidget {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Text(
-                                '19',
+                                (weatherInfo),
                                 style: AppTextStyles.Gradus,
                               ),
-                              Text(
+                              const Text(
                                 '°C',
                                 style: TextStyle(fontSize: 25),
                               ),
                             ],
                           ),
-                          Text(
+                          const Text(
                             'Rainy',
                             style: AppTextStyles.Rainy,
                           ),
