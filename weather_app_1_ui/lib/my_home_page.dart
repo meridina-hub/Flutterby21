@@ -21,6 +21,8 @@ class _MyHomePageState extends State<MyHomePage> {
   String weatherInfo = "Maalymatjuktoluudo...";
   String sityName = "";
   String countryN = "";
+  String weatherIcon = "";
+  String mainWeather = "";
   void weatherFun() async {
     final url = Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?q=osh,&appid=41aa18abb8974c0ea27098038f6feb1b');
@@ -30,13 +32,19 @@ class _MyHomePageState extends State<MyHomePage> {
 
       final data = jsonDecode(response.body);
       final name = data["name"];
-      final countryName = data["sys"]["country"];
       final temp = data["main"]["temp"];
+      final countryName = data["sys"]["country"];
+      final icon = data["weather"][0]["icon"];
+      final main = data["weather"][1]["main"];
+
       final withKelvin = temp - 273.15;
+
       setState(() {
         weatherInfo = withKelvin.toStringAsFixed(0);
         sityName = name;
         countryN = countryName;
+        mainWeather = main;
+        weatherIcon = icon;
       });
     } else {
       print(response.statusCode);
@@ -89,10 +97,10 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   Row(
                     children: [
-                      Image.asset(
-                        'assets/cludy.png',
-                        width: 200.16,
-                        height: 250.98,
+                      Image.network(
+                        ' https://openweathermap.org/img/wn/10d@2x.png',
+                        width: 250.16,
+                        height: 200.98,
                       ),
                       const SizedBox(
                         width: 10,
@@ -114,8 +122,8 @@ class _MyHomePageState extends State<MyHomePage> {
                               ),
                             ],
                           ),
-                          const Text(
-                            'Rainy',
+                          Text(
+                            mainWeather,
                             style: AppTextStyles.Rainy,
                           ),
                         ],
