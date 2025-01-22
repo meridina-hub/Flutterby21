@@ -21,7 +21,7 @@ class _MyHomePageState extends State<MyHomePage> {
   String countryN = "";
   String weatherIcon = "";
   String mainWeather = "";
-  double windweather = 0.0;
+  double windweather = 0;
   void weatherFun() async {
     final url = Uri.parse(
         'https://api.openweathermap.org/data/2.5/weather?q=osh,&appid=41aa18abb8974c0ea27098038f6feb1b');

@@ -1,21 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:news_app_ui/constants/text_styles/text_styles.dart';
 import 'package:news_app_ui/features/data/oop.dart';
+import 'package:news_app_ui/features/model/news_model.dart';
 
 class NewsCard extends StatelessWidget {
   const NewsCard({
     super.key,
     required this.index,
+    required this.data,
   });
   final int index;
+  final List<Articles>? data;
   @override
   Widget build(BuildContext context) {
+    final news = data?[index];
     return Card(
       margin: const EdgeInsets.symmetric(vertical: 8),
       child: Row(
         children: [
-          Image.asset(
-            newsList[index].image,
+          Image.network(
+            news?.urlToImage ?? "",
             height: 130,
             width: 115,
             fit: BoxFit.cover,
@@ -27,11 +31,11 @@ class NewsCard extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    newsList[index].data,
+                    news?.title ?? "bez authora",
                     style: NewsTextStyle,
                   ),
                   Text(
-                    newsList[index].text,
+                    news?.description ?? "bez description",
                     style: NewsTextStyle,
                   ),
                 ],
