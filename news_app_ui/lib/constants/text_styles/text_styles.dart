@@ -8,7 +8,15 @@ class TextStyles {
       color: Color.fromARGB(255, 11, 10, 10),
       fontSize: 14,
       fontWeight: FontWeight.w500);
+
+  static const TextStyle newsUrlTextStyle = TextStyle(
+    color: Colors.blue,
+    fontSize: 14,
+    fontWeight: FontWeight.w500,
+  );
 }
 
 const Textstyle = TextStyles.titleStyle;
 const NewsTextStyle = TextStyles.newsTextStyle;
+
+const newsUrlTextStyle = TextStyles.newsUrlTextStyle;

@@ -31,12 +31,17 @@ class _MyHomePageState extends State<MyHomePage> {
                 child: Text('Сервер не работает'),
               );
             } else if (snapshot.connectionState == ConnectionState.done) {
-              return ListView.builder(
-                  itemCount: snapshot.data?.articles!.length,
-                  itemBuilder: (context, index) {
-                    final data = snapshot.data?.articles;
-                    return NewsCard(index: index, data: data);
-                  });
+              return RefreshIndicator(
+                onRefresh: () async {
+                  NewsModel();
+                },
+                child: ListView.builder(
+                    itemCount: snapshot.data?.articles!.length,
+                    itemBuilder: (context, index) {
+                      final data = snapshot.data?.articles;
+                      return NewsCard(index: index, data: data);
+                    }),
+              );
             }
             return Center(
               child: Text('belgisiz abal'),

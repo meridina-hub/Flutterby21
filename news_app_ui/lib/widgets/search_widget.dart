@@ -9,16 +9,28 @@ class SearchWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-        radius: 40,
-        backgroundColor: AppColors.orangeColor,
-        child: IconButton(
-          onPressed: () {},
-          icon: Icon(
-            Icons.search,
-            color: IconColors.searchColor,
-            size: 30,
-          ),
-        ));
+    return Container(
+      decoration: const BoxDecoration(
+          color: Colors.black,
+          shape: BoxShape.circle,
+          boxShadow: [
+            BoxShadow(
+                blurRadius: 5,
+                color: Colors.black,
+                spreadRadius: 1,
+                offset: Offset(5, 5))
+          ]),
+      child: CircleAvatar(
+          radius: 30,
+          backgroundColor: AppColors.orangeColor,
+          child: IconButton(
+            onPressed: () {},
+            icon: Icon(
+              Icons.search,
+              color: IconColors.searchColor,
+              size: 30,
+            ),
+          )),
+    );
   }
 }
