@@ -1,26 +1,32 @@
 abstract class Model {
   final String text;
-
-  Model({required this.text});
+  final String image;
+  Model({required this.text, required this.image});
 }
 
 class ContinentModel extends Model {
-  ContinentModel({required super.text});
+  ContinentModel({required super.text, required super.image});
 }
 
 class CountriesModel extends Model {
-  CountriesModel({required super.text});
+  CountriesModel({required super.text, required super.image});
 }
 
-ContinentModel object = ContinentModel(text: "Europe");
+ContinentModel object =
+    ContinentModel(text: "Europe", image: 'assets/continents/europe.png');
 
-ContinentModel object1 = ContinentModel(text: "Asia");
-ContinentModel object2 = ContinentModel(text: "North America");
+ContinentModel object1 =
+    ContinentModel(text: "Asia", image: 'assets/continents/asia.png');
+ContinentModel object2 = ContinentModel(
+    text: "North America", image: 'assets/continents/nourth.america.png');
 
-ContinentModel object3 = ContinentModel(text: "South America");
-ContinentModel object4 = ContinentModel(text: "Africa");
+ContinentModel object3 = ContinentModel(
+    text: "South America", image: 'assets/continents/south.america.png');
+ContinentModel object4 =
+    ContinentModel(text: "Africa", image: 'assets/continents/africa.png');
 
-ContinentModel object5 = ContinentModel(text: "Australia");
+ContinentModel object5 =
+    ContinentModel(text: "Australia", image: 'assets/continents/australia.png');
 
 List<ContinentModel> a = [
   object,

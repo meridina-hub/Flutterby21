@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:game_countries_app/countries_page.dart';
 import 'package:game_countries_app/features/app_text.dart';
 import 'package:game_countries_app/features/app_texts.dart';
 import 'package:game_countries_app/features/model.dart';
+import 'package:game_countries_app/theme/app_bcg_color.dart';
 
 class ContinentsPage extends StatelessWidget {
   const ContinentsPage({super.key});
@@ -9,6 +11,7 @@ class ContinentsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: scaffoldColor,
       appBar: _my_AppBar(),
       body: Column(
         children: [
@@ -23,6 +26,18 @@ class ContinentsPage extends StatelessWidget {
                 children: List.generate(6, (index) {
                   return CardWidget(
                     text: a[index].text,
+                    image: a[index].image,
+                    onTap: () {
+                      if (a[index].text == "Asia") {
+                        Navigator.push(context,
+                            MaterialPageRoute(builder: (context) {
+                          return CountriesPage();
+                        }));
+                      } else {
+                        null;
+                      }
+                    },
+                    color: Color(0xfff6f6f6),
                   );
                 })),
           )
@@ -52,14 +67,32 @@ class CardWidget extends StatelessWidget {
   const CardWidget({
     super.key,
     required this.text,
+    required this.image,
+    this.onTap,
+    required this.color,
   });
   final String text;
+  final String image;
+  final void Function()? onTap;
+  final Color color;
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.all(8),
-      color: Colors.teal[400],
-      child: appText.title(text),
+    return InkWell(
+      onTap: onTap,
+      child: Container(
+          padding: EdgeInsets.all(8),
+          color: color,
+          child: Center(
+            child: Column(
+              children: [
+                appText.title(text),
+                Image.asset(
+                  image,
+                  width: 120,
+                ),
+              ],
+            ),
+          )),
     );
   }
 }
