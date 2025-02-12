@@ -5,7 +5,7 @@ class AppText {
   Widget header(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 14, fontWeight: FontWeight.w700, color: Colors.black),
     );
   }
@@ -14,7 +14,7 @@ class AppText {
   Widget title(String text) {
     return Text(
       text,
-      style: TextStyle(
+      style: const TextStyle(
           fontSize: 12, fontWeight: FontWeight.w700, color: Colors.black),
     );
   }

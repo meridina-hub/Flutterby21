@@ -1,3 +1,4 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:news_app_ui/constants/text_styles/text_styles.dart';
@@ -32,11 +33,15 @@ class NewsCard extends StatelessWidget {
           padding: const EdgeInsets.symmetric(vertical: 10),
           child: Row(
             children: [
-              Image.network(
-                news?.urlToImage ?? "",
-                height: 130,
-                width: 115,
-                fit: BoxFit.cover,
+              SizedBox(
+                width: 130,
+                height: 135,
+                child: CachedNetworkImage(
+                  imageUrl: news?.urlToImage ?? "",
+                  placeholder: (context, url) =>
+                      CircularProgressIndicator.adaptive(),
+                  errorWidget: (context, url, error) => Icon(Icons.error),
+                ),
               ),
               Expanded(
                 child: Padding(
@@ -53,7 +58,7 @@ class NewsCard extends StatelessWidget {
                         style: NewsTextStyle,
                       ),
                       Text(
-                        news?.description ?? "bez description",
+                        news?.title ?? "bez title",
                         style: NewsTextStyle,
                       ),
                       Text(

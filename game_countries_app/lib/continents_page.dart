@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:game_countries_app/countries_page.dart';
 import 'package:game_countries_app/features/app_text.dart';
 import 'package:game_countries_app/features/app_texts.dart';
-import 'package:game_countries_app/features/model.dart';
+import 'package:game_countries_app/features/model/continent_model.dart';
 import 'package:game_countries_app/theme/app_bcg_color.dart';
 
 class ContinentsPage extends StatelessWidget {
@@ -12,32 +12,32 @@ class ContinentsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: scaffoldColor,
-      appBar: _my_AppBar(),
+      appBar: myAppBar(),
       body: Column(
         children: [
-          Line(),
+          const Line(),
           Expanded(
             child: GridView.count(
                 primary: false,
-                padding: EdgeInsets.all(20),
+                padding: const EdgeInsets.all(20),
                 crossAxisSpacing: 10,
                 mainAxisSpacing: 10,
                 crossAxisCount: 2,
                 children: List.generate(6, (index) {
                   return CardWidget(
-                    text: a[index].text,
-                    image: a[index].image,
+                    text: continentList[index].text,
+                    image: continentList[index].image,
                     onTap: () {
-                      if (a[index].text == "Asia") {
+                      if (continentList[index].text == "Asia") {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                          return CountriesPage();
+                          return const CountriesPage();
                         }));
                       } else {
                         null;
                       }
                     },
-                    color: Color(0xfff6f6f6),
+                    color: const Color(0xfff6f6f6),
                   );
                 })),
           )
@@ -46,7 +46,7 @@ class ContinentsPage extends StatelessWidget {
     );
   }
 
-  AppBar _my_AppBar() {
+  AppBar myAppBar() {
     return AppBar(
       title: appText.header(appTexts.titleText),
       actions: const [
@@ -66,13 +66,13 @@ class ContinentsPage extends StatelessWidget {
 class CardWidget extends StatelessWidget {
   const CardWidget({
     super.key,
-    required this.text,
-    required this.image,
+    this.text,
     this.onTap,
     required this.color,
+    this.image,
   });
-  final String text;
-  final String image;
+  final String? text;
+  final String? image;
   final void Function()? onTap;
   final Color color;
   @override
@@ -80,16 +80,12 @@ class CardWidget extends StatelessWidget {
     return InkWell(
       onTap: onTap,
       child: Container(
-          padding: EdgeInsets.all(8),
+          padding: const EdgeInsets.all(8),
           color: color,
           child: Center(
             child: Column(
               children: [
-                appText.title(text),
-                Image.asset(
-                  image,
-                  width: 120,
-                ),
+                appText.title(text!),
               ],
             ),
           )),
@@ -104,7 +100,7 @@ class Line extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Divider(
+    return const Divider(
       color: Colors.black,
       indent: 20,
       endIndent: 20,

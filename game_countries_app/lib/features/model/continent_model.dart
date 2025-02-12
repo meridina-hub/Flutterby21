@@ -8,10 +8,6 @@ class ContinentModel extends Model {
   ContinentModel({required super.text, required super.image});
 }
 
-class CountriesModel extends Model {
-  CountriesModel({required super.text, required super.image});
-}
-
 ContinentModel object =
     ContinentModel(text: "Europe", image: 'assets/continents/europe.png');
 
@@ -28,7 +24,7 @@ ContinentModel object4 =
 ContinentModel object5 =
     ContinentModel(text: "Australia", image: 'assets/continents/australia.png');
 
-List<ContinentModel> a = [
+List<ContinentModel> continentList = [
   object,
   object1,
   object2,
